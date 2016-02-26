@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/pageTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:height="25dp"
+        android:text="@string/page_title"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:textIsSelectable="true"
+        android:textSize="20sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/moduleTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/module_placeholder"
+        android:height="45dp"
+        android:textSize="20sp"
+        android:layout_below="@+id/pageTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:minWidth="210dp"
+        android:maxWidth="250dp" />
+
+    <EditText
+        android:id="@+id/moduleGrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="95dp"
+        android:ems="10"
+        android:hint="@string/module_grade"
+        android:inputType="numberSigned"
+        android:numeric="integer"
+        android:height="45dp"
+        android:textSize="20sp"
+        android:layout_alignBottom="@+id/moduleTitle"
+        android:layout_toRightOf="@+id/moduleTitle"
+        android:layout_toEndOf="@+id/moduleTitle"
+        android:maxWidth="150dp"
+        android:minWidth="100dp" />
+
+    <Button
+        android:id="@+id/addNewModuleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/moduleTitle"
+        android:layout_centerHorizontal="true"
+        android:width="175dp"
+        android:background="@color/mainAppColor"
+        android:text="@string/add_module_button"
+        android:onClick="onAddModuleClick"
+        android:height="40dp"
+        android:minHeight="0dp"
+        android:layout_alignParentEnd="false"
+        android:textSize="20sp" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addNewModuleButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/table_border"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:id="@+id/overallClassificationTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="@string/overall_classification"
+            android:textSize="25sp"
+            android:textColor="#000000"
+            android:height="30dp"
+            android:layout_alignParentEnd="false" />
+
+        <TextView
+            android:id="@+id/averagePercentageTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/overallClassificationTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:text="@string/average_percentage"
+            android:textSize="25sp"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/overallClassificationValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/overallClassificationTitle"
+            android:layout_centerHorizontal="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/secondaryAppColor"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/averagePercentageValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/averagePercentageTitle"
+            android:layout_centerHorizontal="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/secondaryAppColor"
+            android:textSize="20sp"
+            android:layout_marginBottom="10dp" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_marginTop="20dp">
+
+        <TableLayout
+            android:id="@+id/modulesTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:nestedScrollingEnabled="false">
+
+            <TableRow
+                android:id="@+id/headerTableRow"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:minHeight="30dp">
+
+                <TextView
+                    android:id="@+id/resultsTableHeaderModuleName"
+                    android:height="30dp"
+                    android:background="@color/mainAppColor"
+                    android:text="@string/module_name"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:layout_width="fill_parent"
+                    android:minWidth="180dp"
+                    android:gravity="center"
+                    android:maxWidth="250dp"></TextView>
+
+                <TextView
+                    android:id="@+id/resultsTableHeaderModuleGrade"
+                    android:height="30dp"
+                    android:background="@color/mainAppColor"
+                    android:gravity="center"
+                    android:text="@string/module_grade"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:layout_width="fill_parent"
+                    android:maxWidth="150dp"
+                    android:minWidth="120dp"></TextView>
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/noEntriesTableRow"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|center_horizontal">
+
+                <TextView
+                    android:id="@+id/noEntriesTableCell"
+                    android:layout_span="2"
+                    android:height="30dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="@string/no_entries_string"
+                    android:textColor="#000000"></TextView>
+            </TableRow>
+
+
+        </TableLayout>
+    </ScrollView>
+
+</RelativeLayout>

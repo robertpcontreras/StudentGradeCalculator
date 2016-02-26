@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Student Grade Calculator</string>
+    <string name="page_title">Add New Module Grade:</string>
+    <string name="module_placeholder">Enter Module Title</string>
+    <string name="module_grade">Grade %</string>
+    <string name="add_module_button">Add</string>
+    <string name="module_name">Module Name</string>
+    <string name="edit">Edit</string>
+    <string name="no_entries_string">Please add some Module Results</string>
+    <string name="overall_classification">Overall Classification:</string>
+    <string name="average_percentage">Average Percentage:</string>
+    <string name="module_title_error">Module title cannot be empty</string>
+    <string name="duplicate_module_error">This module has already been entered</string>
+    <string name="module_grade_error">Module grade must be an integer between 0 and 100</string>
+    <string name="toast_new_module_confirmation">Your module has been added</string>
+</resources>
