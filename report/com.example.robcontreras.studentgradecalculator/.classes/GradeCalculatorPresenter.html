@@ -1,0 +1,170 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: GradeCalculatorPresenter</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.example.robcontreras.studentgradecalculator</a> ]
+</div>
+
+<h1>Coverage Summary for Class: GradeCalculatorPresenter (com.example.robcontreras.studentgradecalculator)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GradeCalculatorPresenter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (24/ 24)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.example.robcontreras.studentgradecalculator;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;/**
+<i>4</i>&nbsp; * Created by RobContreras on 15/01/16.
+<i>5</i>&nbsp; */
+<i>6</i>&nbsp;public class GradeCalculatorPresenter implements ValidationErrorListener {
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;    /**
+<i>9</i>&nbsp;     * Defining class properties
+<i>10</i>&nbsp;     */
+<i>11</i>&nbsp;    private GradeCalculatorView courseView;
+<i>12</i>&nbsp;    public Course course;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;    /**
+<i>15</i>&nbsp;     * Constructor sets the presenters dependencies.
+<i>16</i>&nbsp;     *
+<i>17</i>&nbsp;     * @param courseView The activity that instantiated the object
+<i>18</i>&nbsp;     */
+<b class="fc"><i>19</i>&nbsp;    public GradeCalculatorPresenter(GradeCalculatorView courseView) {</b>
+<i>20</i>&nbsp;        /**
+<i>21</i>&nbsp;         * Instantiate a new course. This can now be used to add modules and calculate
+<i>22</i>&nbsp;         * the overall grades. Going forward we can check to see if a course is
+<i>23</i>&nbsp;         * already stored within a databse and retrieve it from there.
+<i>24</i>&nbsp;         */
+<b class="fc"><i>25</i>&nbsp;        this.course = new Course();</b>
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;        /**
+<i>28</i>&nbsp;         * Assigning the view to the presenter. This will
+<i>29</i>&nbsp;         * allow us to modify the view when required.
+<i>30</i>&nbsp;         */
+<b class="fc"><i>31</i>&nbsp;        this.courseView = courseView;</b>
+<b class="fc"><i>32</i>&nbsp;    }</b>
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;    /**
+<i>35</i>&nbsp;     * The user has requested to add a new module to his course. Start the progress
+<i>36</i>&nbsp;     * bar, validate the input then add the module to the course.
+<i>37</i>&nbsp;     *
+<i>38</i>&nbsp;     * @param moduleTitle The module title entered by the user
+<i>39</i>&nbsp;     * @param moduleGrade The module grade entered by the user
+<i>40</i>&nbsp;     */
+<i>41</i>&nbsp;    public void addNewModuleToCourse(String moduleTitle, String moduleGrade) {
+<b class="fc"><i>42</i>&nbsp;        courseView.showProgressBar();</b>
+<b class="fc"><i>43</i>&nbsp;        if (Module.validateModule(course, moduleTitle, moduleGrade, this) == true) {</b>
+<b class="fc"><i>44</i>&nbsp;            onModuleAdded(course.addModule(moduleTitle, moduleGrade));</b>
+<i>45</i>&nbsp;        }
+<b class="fc"><i>46</i>&nbsp;    }</b>
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    /**
+<i>49</i>&nbsp;     * Validation has passed and the business logic has been handled
+<i>50</i>&nbsp;     * by the model classes. Now lets show the user the results.
+<i>51</i>&nbsp;     */
+<i>52</i>&nbsp;    public void onModuleAdded(Module newModule) {
+<b class="fc"><i>53</i>&nbsp;        courseView.removeNoEntriesTableRow();</b>
+<b class="fc"><i>54</i>&nbsp;        courseView.addModuleResultToTable(newModule.title, newModule.grade);</b>
+<b class="fc"><i>55</i>&nbsp;        courseView.updateOverallResults(course.calculateOverallClassification(), course.calculateAveragePercentage());</b>
+<b class="fc"><i>56</i>&nbsp;        courseView.clearEditTextFields();</b>
+<b class="fc"><i>57</i>&nbsp;        courseView.hideProgressBar();</b>
+<b class="fc"><i>58</i>&nbsp;        courseView.displayToastConfirmation();</b>
+<b class="fc"><i>59</i>&nbsp;    }</b>
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;    /**
+<i>62</i>&nbsp;     * There was an error with the module title entered by the
+<i>63</i>&nbsp;     * user. Hide the progress bar and display the error.
+<i>64</i>&nbsp;     */
+<i>65</i>&nbsp;    public void onModuleTitleError() {
+<b class="fc"><i>66</i>&nbsp;        courseView.hideProgressBar();</b>
+<b class="fc"><i>67</i>&nbsp;        courseView.setModuleTitleError();</b>
+<b class="fc"><i>68</i>&nbsp;    }</b>
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    /**
+<i>71</i>&nbsp;     * The User has tried to enter a module that has already been
+<i>72</i>&nbsp;     * added. Hide the progress bar and display the error.
+<i>73</i>&nbsp;     */
+<i>74</i>&nbsp;    public void onDuplicateModuleError() {
+<b class="fc"><i>75</i>&nbsp;        courseView.hideProgressBar();</b>
+<b class="fc"><i>76</i>&nbsp;        courseView.setDuplicateModuleError();</b>
+<b class="fc"><i>77</i>&nbsp;    }</b>
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    /**
+<i>80</i>&nbsp;     * There was an error with the module grade entered by the
+<i>81</i>&nbsp;     * user. Hide the progress bar and display the error.
+<i>82</i>&nbsp;     */
+<i>83</i>&nbsp;    public void onModuleGradeError() {
+<b class="fc"><i>84</i>&nbsp;        courseView.hideProgressBar();</b>
+<b class="fc"><i>85</i>&nbsp;        courseView.setModuleGradeError();</b>
+<b class="fc"><i>86</i>&nbsp;    }</b>
+<i>87</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-01-21 11:33</div>
+</div>
+</body>
+</html>
