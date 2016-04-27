@@ -1,7 +1,13 @@
-package com.example.robcontreras.studentgradecalculator;
+package com.robertpcontreras.studentgradecalculator;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.test.AndroidTestCase;
+import android.test.RenamingDelegatingContext;
 import android.view.View;
 import android.view.ViewParent;
 import android.widget.EditText;
@@ -14,6 +20,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 
 import org.hamcrest.TypeSafeMatcher;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,8 +43,32 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 @RunWith(AndroidJUnit4.class)
 public class CourseActivityTest {
 
+    Context mMockContext;
+    StudentCalculatorSQLiteHelper dbHelper;
+    ModuleDAO modulesDB;
+
     @Rule
     public ActivityTestRule<CourseActivity> mActivityRule = new ActivityTestRule<>(CourseActivity.class);
+
+    @BeforeClass
+    public static void clearDatabase () {
+        Context mMockContext = new RenamingDelegatingContext(InstrumentationRegistry.getInstrumentation().getTargetContext(), "");
+        StudentCalculatorSQLiteHelper dbHelper = new StudentCalculatorSQLiteHelper(mMockContext);
+        dbHelper.clearDB();
+    }
+
+    @Before
+    public void setUpDBStuff () {
+        mMockContext = new RenamingDelegatingContext(InstrumentationRegistry.getInstrumentation().getTargetContext(), "");
+        dbHelper = new StudentCalculatorSQLiteHelper(mMockContext);
+        modulesDB = new ModuleDAO(dbHelper);
+        dbHelper.clearDB();
+    }
+
+    @After
+    public void clearDB() {
+        dbHelper.clearDB();
+    }
 
     @Test
     public void the_user_can_type_text_into_the_module_title() {

@@ -1,4 +1,4 @@
-package com.example.robcontreras.studentgradecalculator;
+package com.robertpcontreras.studentgradecalculator;
 
 /**
  * Created by RobContreras on 15/01/16.
@@ -17,6 +17,7 @@ public class Module {
     /**
      * Defining class properties
      */
+    public long _id;
     private Course course;
     public String title;
     public int grade;
@@ -45,9 +46,10 @@ public class Module {
      */
     public static boolean validateModule(Course course, String moduleTitle, String moduleGrade, ModuleValidationErrorListener errorListener) {
 
-        // Check to see if the user has entered a module title.
-        if (!moduleTitle.matches(".+")) {
-            errorListener.onModuleTitleError();
+        /**
+         * Call our helper function to check the values passed in are all valid
+         */
+        if (! validateFormat(course, moduleTitle, moduleGrade, errorListener)){
             return false;
         }
 
@@ -57,6 +59,46 @@ public class Module {
                 errorListener.onDuplicateModuleError();
                 return false;
             }
+        }
+
+        return true;
+    }
+
+    /**
+     * Validates the values that will be used to create the object. This is a static
+     * method allowing us to call the method without an instance of the object.
+     *
+     * @param moduleTitle   The title that the user has entered
+     * @param moduleGrade   The grade that the user has entered
+     * @param errorListener An instance of the ModuleValidationErrorListener interface allowing us to call Error Events
+     * @return boolean      The result of the validation
+     */
+    public static boolean validateModule(long moduleID, Course course, String moduleTitle, String moduleGrade, ModuleValidationErrorListener errorListener) {
+
+        /**
+         * Call our helper function to check the values passed in are all valid
+         */
+        if (! validateFormat(course, moduleTitle, moduleGrade, errorListener)){
+            return false;
+        }
+
+        // Check to see if the same module has not already been added but only if it has a different id
+        for (Module module : course.modules) {
+            if (moduleTitle.equals(module.title) && module._id != moduleID) {
+                errorListener.onDuplicateModuleError();
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static boolean validateFormat(Course course, String moduleTitle, String moduleGrade, ModuleValidationErrorListener errorListener) {
+
+        // Check to see if the user has entered a module title.
+        if (!moduleTitle.matches(".+")) {
+            errorListener.onModuleTitleError();
+            return false;
         }
 
         // Check to see if a grade has been entered and it is an integer
