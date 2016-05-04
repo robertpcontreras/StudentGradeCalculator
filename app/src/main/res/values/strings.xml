@@ -4,6 +4,8 @@
     <string name="module_placeholder">Enter Module Title</string>
     <string name="module_grade">Grade %</string>
     <string name="add_module_button">Add</string>
+    <string name="save_module_button">Save</string>
+    <string name="delete_module_button">Delete</string>
     <string name="module_name">Module Name</string>
     <string name="edit">Edit</string>
     <string name="no_entries_string">Please add some Module Results</string>
@@ -13,4 +15,7 @@
     <string name="duplicate_module_error">This module has already been entered</string>
     <string name="module_grade_error">Module grade must be an integer between 0 and 100</string>
     <string name="toast_new_module_confirmation">Your module has been added</string>
+    <string name="toast_update_module_confirmation">Your module has been updated</string>
+    <string name="toast_delete_module_confirmation">Your module has been deleted</string>
+
 </resources>

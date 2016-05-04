@@ -1,4 +1,4 @@
-package com.example.robcontreras.studentgradecalculator;
+package com.robertpcontreras.studentgradecalculator;
 
 import org.junit.Before;
 import org.junit.Test;

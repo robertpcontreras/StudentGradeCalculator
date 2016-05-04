@@ -1,4 +1,4 @@
-package com.example.robcontreras.studentgradecalculator;
+package com.robertpcontreras.studentgradecalculator;
 
 /**
  * Created by RobContreras on 17/01/16.

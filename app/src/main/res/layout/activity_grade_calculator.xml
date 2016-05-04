@@ -172,7 +172,7 @@
                     android:layout_width="fill_parent"
                     android:minWidth="180dp"
                     android:gravity="center"
-                    android:maxWidth="250dp"></TextView>
+                    android:maxWidth="250dp"/>
 
                 <TextView
                     android:id="@+id/resultsTableHeaderModuleGrade"
@@ -184,8 +184,23 @@
                     android:textStyle="bold"
                     android:textSize="15sp"
                     android:layout_width="fill_parent"
-                    android:maxWidth="150dp"
-                    android:minWidth="120dp"></TextView>
+                    android:maxWidth="70dp"
+                    android:minWidth="70dp"/>
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:height="30dp"
+                    android:background="@color/mainAppColor"
+                    android:gravity="center"
+                    android:text="@string/edit"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:layout_width="fill_parent"
+                    android:maxWidth="50dp"
+                    android:minWidth="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2" />
 
             </TableRow>
 
@@ -197,15 +212,47 @@
 
                 <TextView
                     android:id="@+id/noEntriesTableCell"
-                    android:layout_span="2"
+                    android:layout_span="3"
                     android:height="30dp"
                     android:gravity="center_vertical|center_horizontal"
                     android:text="@string/no_entries_string"
-                    android:textColor="#000000"></TextView>
+                    android:textColor="#000000" />
+
             </TableRow>
 
 
         </TableLayout>
     </ScrollView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="100dp"
+        android:background="#f40101"
+        android:text="@string/delete_module_button"
+        android:onClick="onDeleteModuleClick"
+        android:height="40dp"
+        android:minHeight="0dp"
+        android:textSize="20sp"
+        android:layout_below="@+id/moduleTitle"
+        android:layout_alignStart="@+id/relativeLayout"
+        android:layout_above="@+id/relativeLayout"
+        android:visibility="invisible"
+        android:id="@+id/deleteModuleButton" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="100dp"
+        android:text="@string/save_module_button"
+        android:onClick="onSaveModuleClick"
+        android:height="40dp"
+        android:minHeight="0dp"
+        android:textSize="20sp"
+        android:layout_above="@+id/relativeLayout"
+        android:layout_alignEnd="@+id/relativeLayout"
+        android:background="@color/mainAppColor"
+        android:visibility="invisible"
+        android:id="@+id/saveModuleButton" />
 
 </RelativeLayout>

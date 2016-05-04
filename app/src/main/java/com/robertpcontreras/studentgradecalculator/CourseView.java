@@ -1,4 +1,4 @@
-package com.example.robcontreras.studentgradecalculator;
+package com.robertpcontreras.studentgradecalculator;
 
 /**
  * Created by RobContreras on 17/01/16.
@@ -13,12 +13,19 @@ public interface CourseView {
 
     void showProgressBar();
     void removeNoEntriesTableRow();
-    void addModuleResultToTable(String classification, int percentage);
+    void addModuleResultToTable(long moduleID, String classification, int percentage);
     void updateOverallResults(String classification, int percentage);
     void displayToastConfirmation();
+    void displayUpdateToastConfirmation();
+    void displayDeleteToastConfirmation();
     void clearEditTextFields();
     void hideProgressBar();
     void setModuleTitleError();
     void setDuplicateModuleError();
     void setModuleGradeError();
+    void addModuleToEditFields(Module module);
+    void removeAllTableRows();
+    void showEditButtons();
+    void showAddButton();
+    void addNoEntriesTableRow();
 }
